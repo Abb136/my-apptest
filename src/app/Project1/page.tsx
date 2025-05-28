@@ -1,8 +1,7 @@
-/* import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react"
-import { unstable_cache } from 'next/cache' */
-'use client'; // if using App Router (Next.js 13+)
+'use client';
 
 import { useEffect, useState } from 'react';
+import MyMap from '../Project1/map';
 
 export default function HomePage() {
   const [countries, setCountries] = useState([]);
@@ -15,44 +14,9 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main>
-      <h1>🌍 Countries of the World</h1>
-      <ul>
-        {countries.map((country: any, index) => (
-          <li key={index}>
-            <img src={country.flags.png} alt={`Flag of ${country.name.common}`} width={30} />
-            {country.name.common} - {country.region}
-          </li>
-        ))}
-      </ul>
-    </main>
+    <div>
+      <h1>Country Map</h1>
+      <MyMap countries={countries} />
+    </div>
   );
-}
-
-/* import { db, posts } from '@/lib/db'
-
-
-
-const getPosts = unstable_cache(
-  async () => {
-    return await db.select().from(posts)
-  },
-  ['posts'],
-  { revalidate: 3600, tags: ['posts'] }
-)
-
-export default async function Page() {
-  const data = await fetch('https://restcountries.com/v3/all')
-  const posts = await data.json()
-  const allPosts = await getPosts()
-  return (
-    <ul>
-      {posts.map((post: { id: Key; title: string }) => (
-        <li key={post.id}>{post.title}</li>
-      ))}
-      {allPosts.map((post: { id: Key; title: string }) => (
-        <li key={post.id}>{post.title}</li>
-      ))}
-    </ul>
-  )
-} */
+};
